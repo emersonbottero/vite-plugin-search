@@ -1,16 +1,14 @@
 {
-  "name": "@svitejs/vite-plugin-template",
+  "name": "@emersonbottero/vite-plugin-search",
   "version": "0.0.0",
   "license": "MIT",
-  "author": "~~AUTHOR~~",
+  "author": "Emerson Bottero",
   "private": true,
   "type": "module",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    },
+    ".":  "./dist/index.js",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -24,13 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/svitejs/vite-plugin-template.git",
-    "directory": "packages/vite-plugin-template"
+    "url": "git+https://github.com/emersonbottero/vite-plugin-search.git",
+    "directory": "packages/vite-plugin-search"
   },
   "bugs": {
-    "url": "https://github.com/svitejs/vite-plugin-template/issues"
+    "url": "https://github.com/emersonbottero/vite-plugin-search/issues"
   },
-  "homepage": "https://github.com/svitejs/vite-plugin-template/tree/main/packages/vite-plugin-template#readme",
+  "homepage": "https://github.com/emersonbottero/vite-plugin-search/tree/main/packages/vite-plugin-search#readme",
   "peerDependencies": {
     "vite": "^2.9.9"
   },
