@@ -54,7 +54,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@emersonbottero/vite-plugin-search": "workspace:*"
+      "vite-plugin-search": "workspace:*"
     }
   }
 }

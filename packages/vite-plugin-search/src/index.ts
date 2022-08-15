@@ -1,4 +1,6 @@
 import { Plugin } from 'vite';
+import * as fs from 'fs';
+import { IndexSearch } from './node';
 
 export interface Options {
 	// add plugin options here
@@ -15,57 +17,48 @@ export function SearchPlugin(inlineOptions?: Partial<Options>): Plugin {
 		...inlineOptions
 	};
 
-	let config
-
+	let config: any;
+	const virtualModuleId = 'virtual:my-module';
+	const resolvedVirtualModuleId = '\0' + virtualModuleId;
 	return {
 		name: 'vite-plugin-search',
 		enforce: 'post',
-		// add hooks here
-		
-	configResolved(resolvedConfig) {
-		// store the resolved config
-		config = resolvedConfig
-	  },
-		transform(code, id){
-			if(id.endsWith(".md")){
-				console.log(id);
-				console.log(config.env);
-				
-				// code = code.replace("eeeeeeeeeeeeeeee","test")
-				// console.log("\t" + code);
-				return code
+
+		configResolved(resolvedConfig) {
+			// store the resolved config
+			config = resolvedConfig;
+		},
+
+		config: () => ({
+			resolve: {
+				alias: {
+					'./VPNavBarSearch.vue': '@emersonbottero/vite-plugin-search/dist/client/Search.vue'
+				}
 			}
+		}),
 
-	},
+		async buildEnd() {
+			// const { root, base } = config;
+			const { outDir } = config.build;
 
-		// configureServer(server) {
-		// 	server.middlewares.use((req, res, next) => {
-		// 	  // custom handle request...
-		// 	  console.log(res);
-			  
-		// 	})
-		//   },
-
-		// resolveFileUrl(path){
-		// 	console.log('resolving ...' + path);
-			
-		// },
-
-		// buildEnd(ctx){
-		// 	console.log("build ended...");
-			
-		// },
-
-		// resolveId(id){
-		// 	console.log("############" + id);
-
-		// },
-
-		transformIndexHtml(html, ctx) {
-			console.log(html);
-			console.log("🙏");
-			console.log(ctx);
-			// return html.replace(/<title>(.*?)<\/title>/, `<title>Title replaced!</title>`);
+			setTimeout(() => {
+				if (fs.existsSync(outDir)) {
+					console.log('creating search index...');
+					// const files = fs.readdirSync(outDir);
+					console.dir(config.resolve);
+					IndexSearch(outDir);
+				}
+			}, 2000);
+		},
+		resolveId(id) {
+			if (id === virtualModuleId) {
+				return resolvedVirtualModuleId;
+			}
+		},
+		load(id) {
+			if (id === resolvedVirtualModuleId) {
+				return `export const msg = "from virtual module"`;
+			}
 		}
 	};
 }

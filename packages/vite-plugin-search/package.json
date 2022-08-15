@@ -4,11 +4,12 @@
   "license": "MIT",
   "author": "Emerson Bottero",
   "private": true,
-  "type": "module",
-  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".":  "./dist/index.js",
+    ".": [
+      "./dist/index.mjs"
+    ],
+    "./dist/client/Search.vue": "./dist/client/Search.vue",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -31,6 +32,9 @@
   "homepage": "https://github.com/emersonbottero/vite-plugin-search/tree/main/packages/vite-plugin-search#readme",
   "peerDependencies": {
     "vite": "^2.9.9"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0-rc.12"
   },
   "devDependencies": {
     "vite": "^2.9.13",
