@@ -9,6 +9,7 @@
     ".": [
       "./dist/index.mjs"
     ],
+    "./dist/index.mjs": "./dist/index.mjs",
     "./dist/client/Search.vue": "./dist/client/Search.vue",
     "./package.json": "./package.json"
   },
